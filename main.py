@@ -1,6 +1,7 @@
 import bcrypt
 import pyodbc
 from flask import Flask, render_template, request, jsonify
+from genai import take_suggesiton_by_gemini
 
 app = Flask(__name__)
 
@@ -19,7 +20,7 @@ def register1():
 def chatbt():
     return render_template('chatbot.html')
 
-conn_str = r"DRIVER={ODBC Driver 17 for SQL Server};SERVER=DESKTOP-D29ICTS\SQLEXPRESS;DATABASE=Tasklar;Trusted_Connection=yes;"
+conn_str = r"DRIVER={ODBC Driver 17 for SQL Server};SERVER=EMIR\SQLEXPRESS;DATABASE=Tasklar;Trusted_Connection=yes;"
 
 
 
@@ -71,7 +72,8 @@ def login():
 @app.route('/chat', methods=['POST'])
 def chat():
     user_message = request.json['message']
-    bot_reply = f"Bot: '{user_message}' mesajını aldım."  # Burada basit cevap var
+    bot_reply = take_suggesiton_by_gemini(user_message)
+
     return jsonify({'reply': bot_reply})
 
 if __name__ == '__main__':

@@ -42,7 +42,7 @@
         }
 
         .chat-container {
-            width: 400px;
+            width: 800px;
             height: 600px;
             background-color: #fff;
             border-radius: 20px;
@@ -146,7 +146,8 @@
             const chatBox = document.getElementById("chat-box");
             const message = document.createElement("div");
             message.classList.add("message", sender);
-            message.textContent = text;
+            //message.textContent = text;
+            message.innerHTML = text;
             chatBox.appendChild(message);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
