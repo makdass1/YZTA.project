@@ -6,19 +6,37 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f3f4f6;
+      background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+                  url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
 
     .container {
-      background: white;
+     background: rgba(255, 255, 255, 0.95);
       padding: 40px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       width: 300px;
+      backdrop-filter: blur(5px);
+    }
+    .header-images {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    .header-images img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #3b82f6;
     }
 
     h2 {
@@ -62,6 +80,11 @@
 </head>
 <body>
   <div class="container">
+    <div class="header-images">
+      <img src="https://cdn.karar.com/other/2023/09/09/zzzz.jpg" alt="Çiftlik">
+<img src="https://artvin.tarim.gov.tr/IcerikResimleri/HaberResimleri/s%C3%BCt%20sa%C4%9F%C4%B1m.JPG?RenditionId=3">
+      <img src="https://tarimdanhabercom.teimg.com/crop/1280x720/tarimdanhaber-com/uploads/2023/02/hayvancilik/hayvancilik-12.jpg" alt="Süt">
+    </div>
     <h2>Giriş Yap</h2>
     <form id="loginForm" onsubmit="return login(event)">
       <input type="email" id="email" placeholder="E-posta" required>

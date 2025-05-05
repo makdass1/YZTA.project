@@ -2,67 +2,106 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Kayıt Ol</title>
+  <title>Çiftlik Kayıt</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f3f4f6;
+      background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)),
+                  url('https://images.unsplash.com/photo-1473448912268-2022ce9509d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      margin: 0;
     }
 
     .container {
-      background: white;
+      background: rgba(255, 255, 255, 0.95);
       padding: 40px;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       width: 300px;
+      backdrop-filter: blur(5px);
+    }
+
+    .header-images {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+
+    .header-images img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #3b82f6;
     }
 
     h2 {
       text-align: center;
       margin-bottom: 20px;
+      color: #1e3a8a;
     }
 
     input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 10px 0;
-      border: 1px solid #ccc;
+      border: 2px solid #e5e7eb;
       border-radius: 6px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #3b82f6;
+      outline: none;
     }
 
     button {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       background-color: #3b82f6;
       color: white;
       border: none;
       border-radius: 6px;
       cursor: pointer;
       font-size: 16px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     button:hover {
       background-color: #2563eb;
+      transform: translateY(-1px);
     }
 
     p {
       text-align: center;
-      margin-top: 10px;
+      margin-top: 15px;
+      color: #4b5563;
     }
 
     a {
       color: #3b82f6;
       text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Kayıt Ol</h2>
+    <div class="header-images">
+      <img src="https://cdn.karar.com/other/2023/09/09/zzzz.jpg" alt="Çiftlik">
+<img src="https://artvin.tarim.gov.tr/IcerikResimleri/HaberResimleri/s%C3%BCt%20sa%C4%9F%C4%B1m.JPG?RenditionId=3">
+      <img src="https://tarimdanhabercom.teimg.com/crop/1280x720/tarimdanhaber-com/uploads/2023/02/hayvancilik/hayvancilik-12.jpg" alt="Süt">
+    </div>
+    <h2>Çiftlik Kayıt</h2>
     <input type="email" id="email" placeholder="E-posta" required>
     <input type="password" id="password" placeholder="Şifre" required>
     <button onclick="register()">Kayıt Ol</button>
@@ -74,16 +113,25 @@
       const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
-      const response = await fetch('/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
+      if(!email || !password) {
+        alert('Lütfen tüm alanları doldurun!');
+        return;
+      }
 
-      const data = await response.json();
-      alert(data.message);
-      if (response.ok) {
-        window.location.href = "/login";
+      try {
+        const response = await fetch('/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        alert(data.message);
+        if (response.ok) {
+          window.location.href = "/login";
+        }
+      } catch (error) {
+        alert('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
       }
     }
   </script>
